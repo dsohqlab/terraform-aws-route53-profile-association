@@ -1,0 +1,69 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranches": [
+    "main"
+  ],
+  "commitMessageExtra": "to {{newVersion}} (was {{currentVersion}})",
+  "enabledManagers": [
+    "github-actions",
+    "pre-commit",
+    "terraform"
+  ],
+  "extends": [
+    "config:best-practices",
+    ":separateMajorReleases",
+    ":prImmediately",
+    ":gitSignOff"
+  ],
+  "packageRules": [
+    {
+      "addLabels": [
+        "update-major"
+      ],
+      "description": "Label PRs by update type",
+      "matchUpdateTypes": [
+        "major"
+      ]
+    },
+    {
+      "addLabels": [
+        "update-minor"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ]
+    },
+    {
+      "addLabels": [
+        "update-patch"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ]
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "semanticCommitScope": "ci",
+      "semanticCommitType": "chore"
+    },
+    {
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "semanticCommitScope": "ci",
+      "semanticCommitType": "chore"
+    },
+    {
+      "matchManagers": [
+        "terraform"
+      ],
+      "semanticCommitScope": "tf",
+      "semanticCommitType": "feat"
+    }
+  ],
+  "platformAutomerge": false,
+  "prHourlyLimit": 20,
+  "semanticCommits": "enabled"
+}
